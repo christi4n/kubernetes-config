@@ -13,7 +13,7 @@ spec:
         memory: "256Mi"
         cpu: "500m"
     ports:
-      - containerPort: 80
+    - containerPort: 80
   - name: db
     image: mariadb:10.5-focal
     env:
@@ -25,8 +25,16 @@ spec:
         value: mysql_user
       - name: MYSQL_PASSWORD
         value: mysql_passwd
+    ports:
+    - containerPort: 3306
     resources:
       limits:
         memory: "64Mi"
         cpu: "500m"
+    volumeMounts:
+    - name: data
+      mountPath: /var/lib/mysql
+  volumes:
+  - name: data
+    emptyDir: {}
 
