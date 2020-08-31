@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: typo3-v9-starter
+  labels:
+    name: typo3-v9-starter
+spec:
+  containers:
+  - name: typo3
+    image: martinhelmich/typo3:9.5 # https://hub.docker.com/r/martinhelmich/typo3
+    resources:
+      limits:
+        memory: "256Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 80
+  - name: db
+    image: mariadb:10.5-focal
+    env:
+      - name: MYSQL_ROOT_PASSWORD # https://hub.docker.com/_/mariadb
+        value: mysql_rootpasswd
+      - name: MYSQL_DATABASE
+        value: typo3_db
+      - name: MYSQL_USER
+        value: mysql_user
+      - name: MYSQL_PASSWORD
+        value: mysql_passwd
+    resources:
+      limits:
+        memory: "64Mi"
+        cpu: "500m"
+
