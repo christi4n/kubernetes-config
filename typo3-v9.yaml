@@ -8,6 +8,7 @@ spec:
   containers:
   - name: typo3
     image: martinhelmich/typo3:9.5 # https://hub.docker.com/r/martinhelmich/typo3
+    imagePullPolicy: IfNotPresent
     resources:
       limits:
         memory: "256Mi"
@@ -16,6 +17,7 @@ spec:
     - containerPort: 80
   - name: db
     image: mariadb:10.5-focal
+    imagePullPolicy: IfNotPresent
     env:
       - name: MYSQL_ROOT_PASSWORD # https://hub.docker.com/_/mariadb
         value: mysql_rootpasswd
